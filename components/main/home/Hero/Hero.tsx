@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { ArrowRight, MessageCircle, Sparkles } from "lucide-react";
 
@@ -22,7 +21,7 @@ const HeroSection = () => {
       <div className="container relative py-20 mx-auto px-4 md:py-32">
         <div className="mx-auto max-w-4xl text-center animate-fade-up">
           {/* Badge */}
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#8b5cf6]/40 bg-transparent px-4 py-1.5 text-xs font-medium text-[#8b5cf6]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#8b5cf6]/40 bg-transparent px-4 py-1.5 text-xs font-medium text-black">
             <Sparkles className="h-3.5 w-3.5" /> Lead Generation Agency
           </span>
 

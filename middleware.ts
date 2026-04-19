@@ -26,12 +26,19 @@ export async function middleware(req: NextRequest) {
 
 
     if (isLoggedIn) {
-
         if (pathname === "/login") {
-            return NextResponse.redirect(new URL("/dhaka-staff-portal", req.url));
+            if (token.role === "admin" || token.role === "moderator") {
+                return NextResponse.redirect(new URL("/dhaka-staff-portal", req.url));
+            } else {
+                return NextResponse.redirect(new URL("/", req.url));
+            }
         }
 
-
+        if (pathname === "/register") {
+            if (token.role !== "admin") {
+                return NextResponse.redirect(new URL("/", req.url));
+            }
+        }
     }
 
     return NextResponse.next();

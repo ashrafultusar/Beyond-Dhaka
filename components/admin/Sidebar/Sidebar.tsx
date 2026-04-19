@@ -8,8 +8,7 @@ import {
   ChevronLeft,
   Menu,
   X,
-  Star,
-  Settings,
+ 
   Image as ImageIcon,
   LogOut,
 } from "lucide-react";
@@ -25,20 +24,11 @@ const mainMenuItems = [
     href: "/dhaka-staff-portal",
   },
   {
-    name: "Manage Doctors",
+    name: "Manage Portfolio",
     icon: Stethoscope,
-    href: "/dhaka-staff-portal/doctor",
+    href: "/dhaka-staff-portal/portfolio",
   },
-  {
-    name: "Manage Services",
-    icon: Settings,
-    href: "/dhaka-staff-portal/services",
-  },
-  {
-    name: "Patient Reviews",
-    icon: Star,
-    href: "/dhaka-staff-portal/review",
-  },
+  
 
   {
     name: "Adminastation",
@@ -60,7 +50,7 @@ export default function Sidebar() {
           <div className="bg-teal-500 p-1.5 rounded-lg">
             <Stethoscope size={20} className="text-white" />
           </div>
-          <span className="font-bold tracking-tight">DENTAL STAFF</span>
+          <span className="font-bold tracking-tight">Dhaka STAFF</span>
         </div>
 
         <button
@@ -108,7 +98,7 @@ export default function Sidebar() {
                 }`}
             >
               <h1 className="text-lg font-black text-white leading-none">
-                DENTAL<span className="text-teal-400">STAFF</span>
+                Dhaka<span className="text-teal-400">STAFF</span>
               </h1>
               <p className="text-[10px] text-teal-500 font-bold uppercase tracking-[1px] mt-1">
                 Admin Portal

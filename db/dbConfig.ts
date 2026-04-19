@@ -24,7 +24,7 @@ export const connectDB = async () => {
   if (!cached.promise) {
     const opts = {
       // Apnar connection string theke database name ekhane dite paren
-      dbName: "dental_db", 
+      dbName: "dhaka_db",
       bufferCommands: false,
       maxPoolSize: 10,
     };

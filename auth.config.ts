@@ -6,7 +6,7 @@ export const authConfig = {
   },
   session: {
     strategy: "jwt",
-    maxAge: 7 * 24 * 60 * 60, // ১ সপ্তাহ লগইন থাকবে
+    maxAge: 7 * 24 * 60 * 60,
   },
   providers: [],
   callbacks: {

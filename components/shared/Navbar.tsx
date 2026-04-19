@@ -29,6 +29,7 @@ const LandingPage = () => {
           <span className="text-xl text-black font-bold tracking-tight">
             Beyond Dhaka
           </span>
+          
         </div>
 
         {/* Desktop Nav Links */}

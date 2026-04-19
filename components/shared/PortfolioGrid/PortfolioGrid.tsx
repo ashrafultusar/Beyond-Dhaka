@@ -2,25 +2,32 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { portfolioData } from "@/data/portfolioData"; // পাথ ঠিক করে নিবেন
 
-interface PortfolioGridProps {
-  limit?: number; // কয়টি কার্ড দেখাবে
-  showSeeMoreBtn?: boolean; // বাটন দেখাবে কি না
+
+interface PortfolioItem {
+  _id: string;
+  title: string;
+  category: string;
+  image: string;
+  projectUrl?: string; 
 }
 
-const PortfolioGrid: React.FC<PortfolioGridProps> = ({ limit, showSeeMoreBtn = false }) => {
-  // limit থাকলে নির্দিষ্ট সংখ্যক ডেটা দেখাবে, না থাকলে সব দেখাবে
-  const displayedData = limit ? portfolioData.slice(0, limit) : portfolioData;
+interface PortfolioGridProps {
+  data: PortfolioItem[]; 
+  limit?: number;
+  showSeeMoreBtn?: boolean;
+}
+
+const PortfolioGrid: React.FC<PortfolioGridProps> = ({ data, limit, showSeeMoreBtn = false }) => {
+  const displayedData = limit ? data.slice(0, limit) : data;
 
   return (
     <div>
-      {/* Portfolio Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayedData.map((item) => (
           <div
-            key={item.id}
-            className="group bg-white rounded-[24px] overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 cursor-pointer"
+            key={item._id}
+            className="group bg-white rounded-[24px] overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300"
           >
             <div className="w-full aspect-square overflow-hidden bg-slate-100 relative">
               <Image
@@ -29,7 +36,6 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({ limit, showSeeMoreBtn = f
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
-                priority={item.id <= 3}
               />
             </div>
 
@@ -45,12 +51,11 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({ limit, showSeeMoreBtn = f
         ))}
       </div>
 
-      {/* See More Button (Optional) */}
       {showSeeMoreBtn && (
         <div className="flex justify-center mt-12">
           <Link href="/portfolio">
             <button className="flex items-center gap-2 px-6 py-2.5 bg-transparent text-[#0f172a] text-[14px] font-medium border border-[#c4a6fb] rounded-full hover:bg-purple-50 transition-colors">
-              See More Projects <ArrowRight size={16} className="text-[#0f172a]" />
+              See More Projects <ArrowRight size={16} />
             </button>
           </Link>
         </div>
