@@ -28,7 +28,7 @@ export default function LoginPage() {
             if (res?.error) {
                 setError("Invalid credentials. Please try again.");
             } else {
-                router.push("/dental-staff-portal");
+                router.push("/dhaka-staff-portal");
                 router.refresh();
             }
         } catch (err) {

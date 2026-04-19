@@ -74,7 +74,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      // Add this line to ignore attribute mismatches from browser extensions
+     
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >

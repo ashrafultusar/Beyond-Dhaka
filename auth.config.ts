@@ -15,7 +15,7 @@ export const authConfig = {
       const userRole = auth?.user?.role;
       const { pathname } = nextUrl;
 
-      const isOnDashboard = pathname.startsWith("/dental-staff-portal");
+      const isOnDashboard = pathname.startsWith("/dhaka-staff-portal");
       const isLoginPage = pathname.startsWith("/login");
       const isRegisterPage = pathname.startsWith("/register");
 
@@ -32,9 +32,9 @@ export const authConfig = {
       if (isLoggedIn) {
         // লগইন থাকলে /login পেজে যেতে দিবে না, ড্যাশবোর্ডে পাঠিয়ে দিবে
         if (isLoginPage) {
-          return Response.redirect(new URL("/dental-staff-portal", nextUrl));
+          return Response.redirect(new URL("/dhaka-staff-portal", nextUrl));
         }
-        
+
         // লগইন থাকা অবস্থায় /register পেজে যাওয়ার অনুমতি দেওয়া হলো (অ্যাডমিনের জন্য)
         if (isRegisterPage) {
           return true;

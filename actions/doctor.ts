@@ -38,8 +38,8 @@ export async function createDoctorAction(formData: FormData) {
   }
 
   if (success) {
-    revalidatePath("/dental-staff-portal/doctor");
-    redirect("/dental-staff-portal/doctor");
+    revalidatePath("/dhaka-staff-portal/doctor");
+    redirect("/dhaka-staff-portal/doctor");
   }
 }
 
@@ -47,7 +47,7 @@ export async function createDoctorAction(formData: FormData) {
 export async function deleteDoctorAction(id: string) {
   try {
     await connectDB();
-    
+
     // Database theke doctor delete kora
     const deletedDoctor = await Doctor.findByIdAndDelete(id);
 
@@ -56,7 +56,7 @@ export async function deleteDoctorAction(id: string) {
     }
 
     // List refresh korar jonno cache clear kora
-    revalidatePath("/dental-staff-portal/doctor");
+    revalidatePath("/dhaka-staff-portal/doctor");
     return { success: true };
   } catch (error) {
     console.error("Delete failed:", error);
@@ -69,7 +69,7 @@ export async function updateDoctorAction(id: string, formData: FormData) {
   let success = false;
   try {
     await connectDB();
-    
+
     const name = formData.get("name") as string;
     const specialty = formData.get("specialty") as string;
     const experience = formData.get("experience") as string;
@@ -92,7 +92,7 @@ export async function updateDoctorAction(id: string, formData: FormData) {
   }
 
   if (success) {
-    revalidatePath("/dental-staff-portal/doctor");
-    redirect("/dental-staff-portal/doctor");
+    revalidatePath("/dhaka-staff-portal/doctor");
+    redirect("/dhaka-staff-portal/doctor");
   }
 }

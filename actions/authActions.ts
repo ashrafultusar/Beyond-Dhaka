@@ -38,12 +38,12 @@ export async function registerAction(formData: FormData) {
             name,
             email,
             password: hashedPassword,
-            role, 
+            role,
         });
 
         // ড্যাশবোর্ড লিস্ট আপডেট করার জন্য রিভ্যালিডেট
-        revalidatePath("/dental-staff-portal");
-        
+        revalidatePath("/dhaka-staff-portal");
+
         return { success: true, message: "New staff registered successfully" };
     } catch (error: unknown) {
         console.error("Error registering user:", error);
@@ -61,7 +61,7 @@ export async function updateUserRole(userId: string, newRole: string) {
 
         await connectDB();
         await User.findByIdAndUpdate(userId, { role: newRole });
-        revalidatePath("/dental-staff-portal");
+        revalidatePath("/dhaka-staff-portal");
         return { success: true, message: "Role updated successfully" };
     } catch (error) {
         return { success: false, message: "Update failed" };
@@ -77,7 +77,7 @@ export async function deleteUser(userId: string) {
 
         await connectDB();
         await User.findByIdAndDelete(userId);
-        revalidatePath("/dental-staff-portal");
+        revalidatePath("/dhaka-staff-portal");
         return { success: true, message: "User deleted successfully" };
     } catch (error) {
         return { success: false, message: "Deletion failed" };

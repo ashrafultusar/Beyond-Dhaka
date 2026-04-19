@@ -32,8 +32,8 @@ export async function createReviewAction(formData: FormData) {
     }
 
     if (success) {
-        revalidatePath("/dental-staff-portal/review");
-        redirect("/dental-staff-portal/review");
+        revalidatePath("/dhaka-staff-portal/review");
+        redirect("/dhaka-staff-portal/review");
     }
 }
 
@@ -47,7 +47,7 @@ export async function deleteReviewAction(id: string) {
             return { error: "Review not found" };
         }
 
-        revalidatePath("/dental-staff-portal/reviews");
+        revalidatePath("/dhaka-staff-portal/reviews");
         return { success: true };
     } catch (error) {
         console.error("Delete failed:", error);
@@ -76,7 +76,7 @@ export async function updateReviewAction(id: string, formData: FormData) {
     }
 
     if (success) {
-        revalidatePath("/dental-staff-portal/reviews");
-        redirect("/dental-staff-portal/reviews");
+        revalidatePath("/dhaka-staff-portal/reviews");
+        redirect("/dhaka-staff-portal/reviews");
     }
 }

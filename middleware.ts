@@ -12,26 +12,26 @@ export async function middleware(req: NextRequest) {
 
     const pathname = req.nextUrl.pathname;
     const isLoggedIn = !!token;
-    
-    const isAdminRoute = pathname.startsWith("/dental-staff-portal");
+
+    const isAdminRoute = pathname.startsWith("/dhaka-staff-portal");
     if (isAdminRoute) {
         if (!isLoggedIn) {
             return NextResponse.redirect(new URL("/login", req.url));
         }
-      
+
         if (token.role !== "admin" && token.role !== "moderator") {
             return NextResponse.redirect(new URL("/404-not-found", req.url));
         }
     }
 
-   
+
     if (isLoggedIn) {
-       
+
         if (pathname === "/login") {
-            return NextResponse.redirect(new URL("/dental-staff-portal", req.url));
+            return NextResponse.redirect(new URL("/dhaka-staff-portal", req.url));
         }
-        
-        
+
+
     }
 
     return NextResponse.next();

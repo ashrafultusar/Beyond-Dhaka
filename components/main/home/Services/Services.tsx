@@ -1,79 +1,54 @@
 import React from "react";
-import Link from "next/link"; // লিঙ্ক ইমপোর্ট করুন
-import {
-  Sparkles,
-  Activity,
-  Bone,
-  ArrowRight,
-  Stethoscope,
-  Heart,
-  Syringe,
-} from "lucide-react";
-import ServiceCard from "../../card/serviceCard/ServiceCard";
-import { getServicesAction } from "@/lib/data/getService";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { servicesData } from "@/data/servicesData";
 
-interface IService {
-  _id: string;
-  title: string;
-  description: string;
-  price: string;
-  image?: string;
-  icon?: string;
-}
 
-const renderIcon = (iconName?: string) => {
-  const iconProps = { size: 24 };
-  switch (iconName?.toLowerCase()) {
-    case "activity":
-      return <Activity {...iconProps} />;
-    case "bone":
-      return <Bone {...iconProps} />;
-    case "sparkles":
-      return <Sparkles {...iconProps} />;
-    case "syringe":
-      return <Syringe {...iconProps} />;
-    case "heart":
-      return <Heart {...iconProps} />;
-    default:
-      return <Stethoscope {...iconProps} />;
-  }
-};
-
-const Services = async () => {
-  const rawServices: IService[] = await getServicesAction();
-
-  const servicesData = rawServices.map((srv, index) => ({
-    id: index + 1,
-    title: srv.title,
-    description: srv.description,
-    price: srv.price,
-    image: srv.image || "/placeholder-service.png",
-    icon: renderIcon(srv.icon),
-  }));
-
-  // হোম পেজে হয়তো শুধু প্রথম ৩ বা ৬টি সার্ভিস দেখাবেন
-  const featuredServices = servicesData.slice(0, 6);
+const Services = () => {
+  
+  const featuredServices = servicesData.slice(0, 3);
 
   return (
-    <section id="services" className="py-20 bg-[#F8FBFB]">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-5xl lg:text-7xl font-bold text-[#1D2939] leading-[1.1]">
-            Our <span className="text-[#2A9D8F]">Services</span>
+    <section className="py-24 bg-[#fafcff]">
+      <div className="container mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-[40px] md:text-[44px] font-bold text-[#0f172a] mb-4 tracking-tight">
+            What we do
           </h2>
+          <p className="text-[#64748b] text-[15px] max-w-2xl mx-auto font-medium">
+            End-to-end services designed to grow your business and bring real leads.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-12">
+        {/* Services Grid (Only 3 items) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {featuredServices.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+            <div
+              key={service.id}
+              className="bg-white rounded-[24px] p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300"
+            >
+              {/* Icon Box */}
+              <div className="w-[52px] h-[52px] rounded-[14px] bg-[#7a48fb] flex items-center justify-center mb-6">
+                {service.icon}
+              </div>
+
+              {/* Card Content */}
+              <h3 className="text-[19px] font-bold text-[#0f172a] mb-3">
+                {service.title}
+              </h3>
+              <p className="text-[14px] text-[#64748b] leading-[1.6]">
+                {service.description}
+              </p>
+            </div>
           ))}
         </div>
 
+        {/* View All Button */}
         <div className="flex justify-center">
-          {/* এখানে Link ব্যবহার করা হয়েছে */}
           <Link href="/services">
-            <button className="flex items-center gap-2 px-6 py-3 bg-white text-[#1D2939] font-bold border border-gray-200 rounded-xl hover:bg-gray-50 transition-all shadow-sm">
-              View All Services <ArrowRight size={18} />
+            <button className="flex cursor-pointer items-center gap-2 px-6 py-2.5 bg-transparent text-[#0f172a] text-[14px] font-medium border border-[#c4a6fb] rounded-full hover:bg-purple-50 transition-colors">
+              View All Services <ArrowRight size={16} className="text-[#0f172a]" />
             </button>
           </Link>
         </div>

@@ -1,47 +1,44 @@
-import React from 'react';
-import { getServicesAction } from '@/lib/data/getService';
+import React from "react";
+import { servicesData } from "@/data/servicesData"; // পাথ ঠিক করে নিবেন
 
-import { Activity, Bone, Sparkles, Syringe, Heart, Stethoscope } from 'lucide-react';
-import ServiceCard from '@/components/main/card/serviceCard/ServiceCard';
-
-// আইকন রেন্ডার ফাংশনটি আপনি একটি আলাদা ইউটিল ফাইল-এ রাখতে পারেন কোড ডুপ্লিকেশন এড়াতে
-const renderIcon = (iconName?: string) => {
-  const iconProps = { size: 24 };
-  switch (iconName?.toLowerCase()) {
-    case 'activity': return <Activity {...iconProps} />;
-    case 'bone': return <Bone {...iconProps} />;
-    case 'sparkles': return <Sparkles {...iconProps} />;
-    case 'syringe': return <Syringe {...iconProps} />;
-    case 'heart': return <Heart {...iconProps} />;
-    default: return <Stethoscope {...iconProps} />;
-  }
-};
-
-const AllServicesPage = async () => {
-  const rawServices = await getServicesAction();
-
+const AllServicesPage = () => {
   return (
-    <main className="min-h-screen pt-10 pb-20 bg-white">
-      <div className="container mx-auto px-6">
-        <h1 className="text-4xl text-black font-bold text-center mb-12">All Dental Services</h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {rawServices.map((srv: any, index: number) => (
-            <ServiceCard 
-              key={srv._id} 
-              service={{
-                id: index + 1,
-                title: srv.title,
-                description: srv.description,
-                price: srv.price,
-                image: srv.image || "/placeholder-service.png",
-                icon: renderIcon(srv.icon)
-              }} 
-            />
+    <div className="min-h-screen bg-[#fafcff] py-24">
+      <div className="container mx-auto px-6 max-w-[1100px]">
+        {/* Page Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-[40px] md:text-[44px] font-bold text-[#0f172a] mb-4 tracking-tight">
+            All Services
+          </h1>
+          <p className="text-[#64748b] text-[15px] max-w-2xl mx-auto font-medium">
+            Explore our complete range of digital solutions designed for your success.
+          </p>
+        </div>
+
+        {/* Services Grid (Shows ALL items) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {servicesData.map((service) => (
+            <div
+              key={service.id}
+              className="bg-white rounded-[24px] p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300"
+            >
+              {/* Icon Box */}
+              <div className="w-[52px] h-[52px] rounded-[14px] bg-[#7a48fb] flex items-center justify-center mb-6">
+                {service.icon}
+              </div>
+
+              {/* Card Content */}
+              <h3 className="text-[19px] font-bold text-[#0f172a] mb-3">
+                {service.title}
+              </h3>
+              <p className="text-[14px] text-[#64748b] leading-[1.6]">
+                {service.description}
+              </p>
+            </div>
           ))}
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

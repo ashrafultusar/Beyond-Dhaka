@@ -38,8 +38,8 @@ export async function createServiceAction(formData: FormData) {
     }
 
     if (success) {
-        revalidatePath("/dental-staff-portal/services");
-        redirect("/dental-staff-portal/services");
+        revalidatePath("/dhaka-staff-portal/services");
+        redirect("/dhaka-staff-portal/services");
     }
 }
 
@@ -54,7 +54,7 @@ export async function deleteServiceAction(id: string) {
             return { error: "Service not found" };
         }
 
-        revalidatePath("/dental-staff-portal/services");
+        revalidatePath("/dhaka-staff-portal/services");
         return { success: true };
     } catch (error) {
         console.error("Delete failed:", error);
@@ -89,7 +89,7 @@ export async function updateServiceAction(id: string, formData: FormData) {
     }
 
     if (success) {
-        revalidatePath("/dental-staff-portal/services");
-        redirect("/dental-staff-portal/services");
+        revalidatePath("/dhaka-staff-portal/services");
+        redirect("/dhaka-staff-portal/services");
     }
 }

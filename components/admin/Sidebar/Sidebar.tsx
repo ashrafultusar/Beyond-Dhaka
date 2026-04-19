@@ -22,28 +22,28 @@ const mainMenuItems = [
   {
     name: "Dashboard",
     icon: LayoutDashboard,
-    href: "/dental-staff-portal",
+    href: "/dhaka-staff-portal",
   },
   {
     name: "Manage Doctors",
     icon: Stethoscope,
-    href: "/dental-staff-portal/doctor",
+    href: "/dhaka-staff-portal/doctor",
   },
   {
     name: "Manage Services",
     icon: Settings,
-    href: "/dental-staff-portal/services",
+    href: "/dhaka-staff-portal/services",
   },
   {
     name: "Patient Reviews",
     icon: Star,
-    href: "/dental-staff-portal/review",
+    href: "/dhaka-staff-portal/review",
   },
 
   {
     name: "Adminastation",
     icon: CalendarCheck,
-    href: "/dental-staff-portal/adminastation",
+    href: "/dhaka-staff-portal/adminastation",
   },
 ];
 
@@ -102,11 +102,10 @@ export default function Sidebar() {
               <Stethoscope size={26} className="text-white" />
             </div>
             <div
-              className={`ml-4 transition-all duration-300 ${
-                !isOpen
+              className={`ml-4 transition-all duration-300 ${!isOpen
                   ? "lg:opacity-0 lg:invisible lg:w-0"
                   : "opacity-100 visible"
-              }`}
+                }`}
             >
               <h1 className="text-lg font-black text-white leading-none">
                 DENTAL<span className="text-teal-400">STAFF</span>
@@ -126,9 +125,8 @@ export default function Sidebar() {
 
           <div className="flex-1 overflow-y-auto px-4">
             <p
-              className={`text-[10px] uppercase tracking-[2px] text-slate-500 mb-4 mt-6 px-4 font-bold ${
-                !isOpen && "lg:hidden"
-              }`}
+              className={`text-[10px] uppercase tracking-[2px] text-slate-500 mb-4 mt-6 px-4 font-bold ${!isOpen && "lg:hidden"
+                }`}
             >
               Main Menu
             </p>
@@ -140,24 +138,21 @@ export default function Sidebar() {
                     key={item.name}
                     href={item.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className={`group relative flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                      isActive
+                    className={`group relative flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${isActive
                         ? "bg-teal-500 text-white shadow-lg shadow-teal-500/20"
                         : "hover:bg-white/5 hover:text-white"
-                    }`}
+                      }`}
                   >
                     <item.icon
                       size={22}
-                      className={`shrink-0 ${
-                        isActive ? "text-white" : "group-hover:text-teal-400"
-                      }`}
+                      className={`shrink-0 ${isActive ? "text-white" : "group-hover:text-teal-400"
+                        }`}
                     />
                     <span
-                      className={`transition-all duration-300 whitespace-nowrap ${
-                        !isOpen
+                      className={`transition-all duration-300 whitespace-nowrap ${!isOpen
                           ? "lg:opacity-0 lg:w-0 lg:overflow-hidden"
                           : "opacity-100"
-                      }`}
+                        }`}
                     >
                       {item.name}
                     </span>
@@ -182,11 +177,10 @@ export default function Sidebar() {
                   className="shrink-0 text-slate-400 group-hover:text-red-500 transition-colors"
                 />
                 <span
-                  className={`transition-all duration-300 font-bold ${
-                    !isOpen
+                  className={`transition-all duration-300 font-bold ${!isOpen
                       ? "lg:opacity-0 lg:w-0 lg:overflow-hidden"
                       : "opacity-100"
-                  }`}
+                    }`}
                 >
                   Log Out
                 </span>
