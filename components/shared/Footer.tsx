@@ -1,73 +1,74 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { Phone, Mail, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0B1A24] text-white pt-16 pb-8 px-10 font-sans">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-        
-        {/* Column 1: Logo & Description */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center justify-center w-8 h-8 bg-[#2A9D8F] text-white font-bold rounded-lg">
-              D
+    <footer className="font-sans text-white">
+      {/* Main Footer Area */}
+      <div className="bg-[#0A1A30] pt-16 pb-10 px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+          
+          {/* Column 1: Logo & Description */}
+          <div className="md:col-span-6 space-y-4">
+            <div className="flex items-center gap-3">
+              {/* Logo Icon */}
+              <div className="flex items-center justify-center w-8 h-8 bg-[#00E5FF] rounded-md">
+                <span className="text-[#0A1A30] font-bold text-lg leading-none">C</span>
+              </div>
+              <span className="text-xl font-bold tracking-wide">Beyond Dhaka</span>
             </div>
-            <span className="text-xl font-bold tracking-tight"> Sabbir Dental</span>
+            <p className="text-gray-300 text-sm leading-relaxed max-w-sm">
+              We help businesses grow online & generate qualified leads through
+              digital marketing, design, and content creation.
+            </p>
           </div>
-          <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-            আপনার হাসির যত্ন নেওয়া আমাদের কাজ। আধুনিক প্রযুক্তি ও অভিজ্ঞ ডাক্তারদের সাথে সেরা ডেন্টাল সেবা।
-          </p>
-        </div>
 
-        {/* Column 2: Quick Links */}
-        <div>
-          <h3 className="text-lg font-bold mb-6">Quick Links</h3>
-          <ul className="space-y-3 text-gray-400 text-sm">
-            <li><a href="#" className="hover:text-[#2A9D8F] transition-colors">Services</a></li>
-            <li><a href="#" className="hover:text-[#2A9D8F] transition-colors">Doctors</a></li>
-            <li><a href="#" className="hover:text-[#2A9D8F] transition-colors">Reviews</a></li>
-            <li><a href="#" className="hover:text-[#2A9D8F] transition-colors">About</a></li>
-          </ul>
-        </div>
+          {/* Column 2: Pages */}
+          <div className="md:col-span-3">
+            <h4 className="text-[#00E5FF] text-xs font-bold mb-5 tracking-widest uppercase">
+              Pages
+            </h4>
+            <ul className="space-y-3 text-[#B0BAC5] text-sm">
+              <li><a href="#" className="hover:text-white transition-colors">Home</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Services</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Portfolio</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+            </ul>
+          </div>
 
-        {/* Column 3: Contact Info */}
-        <div>
-          <h3 className="text-lg font-bold mb-6">Contact</h3>
-          <ul className="space-y-4 text-gray-400 text-sm">
-            <li className="flex items-center gap-3">
-              <MapPin size={18} className="text-gray-500" />
-              <span>Dhanmondi, Dhaka</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Phone size={18} className="text-gray-500" />
-              <span>+880 1700-000000</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Mail size={18} className="text-gray-500" />
-              <span>info@sabbirdental.com</span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Column 4: Hours */}
-        <div>
-          <h3 className="text-lg font-bold mb-6">Hours</h3>
-          <ul className="space-y-4 text-gray-400 text-sm">
-            <li className="flex items-center gap-3">
-              <Clock size={18} className="text-gray-500" />
-              <span>Sat–Thu: 9AM–9PM</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Clock size={18} className="text-gray-500" />
-              <span>Friday: Closed</span>
-            </li>
-          </ul>
+          {/* Column 3: Contact & WhatsApp */}
+          <div className="md:col-span-3">
+            <h4 className="text-[#00E5FF] text-xs font-bold mb-5 tracking-widest uppercase">
+              Contact
+            </h4>
+            <ul className="space-y-4 text-[#B0BAC5] text-sm">
+              <li className="flex items-center gap-3">
+                <Phone size={16} className="text-[#B0BAC5]" />
+                <span>+880 1819 288 583</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail size={16} className="text-[#B0BAC5]" />
+                <span>sajib@beyonddhaka.com</span>
+              </li>
+              <li className="pt-2">
+                <a 
+                  href="https://wa.me/8801819288583" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors"
+                >
+                  <MessageCircle size={18} />
+                  WhatsApp Now
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      {/* Bottom Border & Copyright */}
-      <div className="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-        <p>© 2026  Sabbir Dental. All rights reserved.</p>
+      {/* Bottom Copyright Area */}
+      <div className="bg-[#061122] py-5 border-t border-[#1C2C45] text-center text-[#6B7C93] text-sm">
+        <p>© {new Date().getFullYear()} Beyond Dhaka. All rights reserved.</p>
       </div>
     </footer>
   );

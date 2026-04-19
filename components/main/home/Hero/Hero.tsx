@@ -1,79 +1,82 @@
-import React from 'react';
-import Image from 'next/image';
-import { ArrowRight, CheckCircle2, Phone } from 'lucide-react';
-import styles from './Hero.module.css'; // Module import kora holo
+import React from "react";
+import Link from "next/link";
+import { ArrowRight, MessageCircle, Sparkles } from "lucide-react";
 
-const Hero = () => {
+const stats = [
+  { value: "200+", label: "Happy Clients" },
+  { value: "5x", label: "Avg ROI" },
+  { value: "10M+", label: "Leads Generated" },
+  { value: "24/7", label: "Support" },
+];
+
+const HeroSection = () => {
   return (
-    <section className="relative w-full min-h-[calc(100vh-80px)] flex items-center bg-[#F8FBFB] overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
-        {/* Left Content */}
-        <div className="space-y-8 z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E9F5F3] text-[#2A9D8F] text-sm font-medium border border-[#D1E9E5]">
-            <span className="text-base">🦷</span> #1 Dental Clinic in Dhaka
-          </div>
+    <section className="relative overflow-hidden w-full">
+      {/* Backgrounds */}
+      <div
+        className="absolute inset-0 -z-10 opacity-90"
+        style={{ backgroundImage: `url('/assets/hero-bg.jpg')`, backgroundSize: "cover", backgroundPosition: "center" }}
+      />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-background/70 to-background" />
 
-          <h1 className="text-5xl lg:text-7xl font-bold text-[#1D2939] leading-[1.1]">
-            Your Smile, <span className="text-[#2A9D8F]">Our Passion</span>
+      <div className="container relative py-20 mx-auto px-4 md:py-32">
+        <div className="mx-auto max-w-4xl text-center animate-fade-up">
+          {/* Badge */}
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#8b5cf6]/40 bg-transparent px-4 py-1.5 text-xs font-medium text-[#8b5cf6]">
+            <Sparkles className="h-3.5 w-3.5" /> Lead Generation Agency
+          </span>
+
+          {/* Title */}
+          <h1 className="mt-6 font-display text-4xl font-bold leading-[1.2] sm:text-5xl md:text-6xl lg:text-[72px] tracking-tight text-[#1a1c23]">
+            We help businesses
+            <br />
+            <span className="bg-gradient-to-r from-[#7a48fb] to-[#9b6cfb] bg-clip-text text-transparent">grow online</span> & generate
+            <br />
+            leads
           </h1>
 
-          <p className="text-gray-500 text-lg max-w-lg leading-relaxed">
-            আধুনিক প্রযুক্তি ও অভিজ্ঞ ডাক্তারদের সাথে সেরা ডেন্টাল সেবা পান। আপনার হাসি আমাদের অঙ্গীকার।
+          {/* Description */}
+          <p className="mt-6 text-lg text-slate-500 md:text-xl font-medium">
+            Digital Marketing | Design | Content Creation
           </p>
 
-          <div className="flex flex-wrap gap-4">
-            <button className="flex items-center gap-2 px-8 py-4 bg-[#2A9D8F] text-white font-bold rounded-xl hover:bg-[#23857a] transition-all shadow-lg shadow-teal-100">
-              Book Appointment <ArrowRight size={20} />
-            </button>
-            <button className="px-8 py-4 bg-white text-[#1D2939] font-bold border border-gray-200 rounded-xl hover:bg-gray-50 transition-all">
-              Our Services
-            </button>
-          </div>
+          {/* Buttons */}
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              href="/contact"
+              className="inline-flex h-14 items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-[#7a48fb] to-[#9b6cfb] px-8 text-sm md:text-base font-semibold text-white shadow-lg shadow-purple-500/20 transition-all hover:scale-105 gap-2"
+            >
+              Get Free Consultation <ArrowRight className="h-5 w-5" />
+            </Link>
 
-          {/* Features Checklist */}
-          <div className="flex flex-wrap gap-6 pt-4">
-            <div className="flex items-center gap-2 text-gray-600 font-medium">
-              <CheckCircle2 size={18} className="text-[#2A9D8F]" /> Pain-free treatments
-            </div>
-            <div className="flex items-center gap-2 text-gray-600 font-medium">
-              <CheckCircle2 size={18} className="text-[#2A9D8F]" /> Modern equipment
-            </div>
-            <div className="flex items-center gap-2 text-gray-600 font-medium">
-              <CheckCircle2 size={18} className="text-[#2A9D8F]" /> Expert doctors
-            </div>
+            <a
+              href="https://wa.me/8801700000000"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-14 items-center justify-center whitespace-nowrap rounded-full bg-[#25D366] px-8 text-sm md:text-base font-semibold text-white shadow-lg shadow-[#25D366]/20 hover:bg-[#25D366]/90 transition-all hover:scale-105 gap-2"
+            >
+              <MessageCircle className="h-5 w-5" /> WhatsApp Now
+            </a>
           </div>
         </div>
 
-        {/* Right Image Section */}
-        <div className="relative flex justify-center items-center">
-          <div className="relative w-full max-w-[550px] aspect-square rounded-[40px] overflow-hidden shadow-2xl">
-            <Image 
-              src="/assets/galery/hero.jpeg"
-              alt="Modern Dental Office"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-
-          {/* Emergency Badge Overlay - Module Class Apply kora holo */}
-          <div className={`${styles.emergencyBadge} absolute -bottom-6 -left-6 md:left-0 bg-white p-4 rounded-2xl shadow-xl border border-gray-50 flex items-center gap-4 z-20`}>
-            <div className="w-12 h-12 bg-[#E9F5F3] rounded-full flex items-center justify-center text-[#2A9D8F]">
-              <Phone size={24} fill="currentColor" />
+        {/* Stats Grid */}
+        <div className="mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-4 px-2">
+          {stats.map((s) => (
+            <div
+              key={s.label}
+              className="rounded-2xl bg-white py-8 px-4 text-center shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
+            >
+              <div className="font-display text-3xl md:text-[32px] font-bold text-[#7a48fb]">
+                {s.value}
+              </div>
+              <div className="mt-2 text-sm text-slate-500 font-medium">{s.label}</div>
             </div>
-            <div>
-              <p className="text-xs text-gray-400 font-medium">Emergency?</p>
-              <p className="text-base font-bold text-[#1D2939]">+880 1700-000000</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-
-      {/* Background Decorative Element */}
-      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#2A9D8F] opacity-[0.03] rounded-full blur-3xl"></div>
     </section>
   );
 };
 
-export default Hero;
+export default HeroSection;
