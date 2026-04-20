@@ -1,79 +1,149 @@
+"use client";
+
+import React from "react";
 import Link from "next/link";
-import { ArrowRight, MessageCircle, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { 
+  ArrowRight, 
+  MessageCircle, 
+  Sparkles, 
+  Star, 
+  TrendingUp 
+} from "lucide-react";
 
-const stats = [
-  { value: "200+", label: "Happy Clients" },
-  { value: "5x", label: "Avg ROI" },
-  { value: "10M+", label: "Leads Generated" },
-  { value: "24/7", label: "Support" },
-];
-
-const HeroSection = () => {
+const HeroSection: React.FC = () => {
   return (
-    <section className="relative overflow-hidden w-full">
-      {/* Backgrounds */}
-      <div
-        className="absolute inset-0 -z-10 opacity-90"
-        style={{ backgroundImage: `url('/assets/hero-bg.jpg')`, backgroundSize: "cover", backgroundPosition: "center" }}
-      />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-background/70 to-background" />
+    <section className="relative overflow-hidden bg-[#fff7f0] pt-20 lg:pt-32 pb-24 min-h-screen flex items-center">
+      {/* --- Background Mesh Glows (Requested Colors) --- */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Upper Left Glow - #fed9c4 */}
+        <div className="absolute -top-[15%] -left-[10%] h-[600px] w-[600px] rounded-full bg-[#fed9c4] blur-[120px] opacity-70" />
+        
+        {/* Lower Right Glow - #bddccb */}
+        <div className="absolute -bottom-[10%] -right-[5%] h-[700px] w-[700px] rounded-full bg-[#bddccb] blur-[140px] opacity-60" />
+      </div>
 
-      <div className="container relative py-20 mx-auto px-4 md:py-32">
-        <div className="mx-auto max-w-4xl text-center animate-fade-up">
-          {/* Badge */}
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#8b5cf6]/40 bg-transparent px-4 py-1.5 text-xs font-medium text-black">
-            <Sparkles className="h-3.5 w-3.5" /> Lead Generation Agency
-          </span>
+      <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+        {/* --- Left Content --- */}
+        <div className="flex flex-col animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#065f46]/5 text-[#065f46]/70 text-xs font-bold mb-8 w-fit border border-[#065f46]/10">
+            <Sparkles className="h-3.5 w-3.5" /> 
+            Beyond Dhaka — Create · Connect · Inspire
+          </div>
 
-          {/* Title */}
-          <h1 className="mt-6 font-display text-4xl font-bold leading-[1.2] sm:text-5xl md:text-6xl lg:text-[72px] tracking-tight text-[#1a1c23]">
-            We help businesses
-            <br />
-            <span className="bg-gradient-to-r from-[#7a48fb] to-[#9b6cfb] bg-clip-text text-transparent">grow online</span> & generate
-            <br />
-            leads
+          <h1 className="font-sans font-extrabold text-5xl md:text-6xl lg:text-[5.5rem] leading-[1] text-[#064e3b] mb-8 tracking-tight">
+            We help businesses <br />
+            <span className="text-[#f97316]">grow online</span> <span className="text-[#064e3b]">&</span> <br />
+            generate leads
           </h1>
 
-          {/* Description */}
-          <p className="mt-6 text-lg text-slate-500 md:text-xl font-medium">
-            Digital Marketing | Design | Content Creation
+          <p className="text-lg lg:text-xl text-[#064e3b]/70 mb-10 max-w-2xl leading-relaxed">
+            Digital Marketing | Design | Content Creation — strategy that turns 
+            scrolls into sales for ambitious brands.
           </p>
 
-          {/* Buttons */}
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="flex flex-wrap gap-5">
             <Link
               href="/contact"
-              className="inline-flex h-14 items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-[#7a48fb] to-[#9b6cfb] px-8 text-sm md:text-base font-semibold text-white shadow-lg shadow-purple-500/20 transition-all hover:scale-105 gap-2"
+              className="flex items-center gap-3 px-10 py-5 bg-[#ff914d] text-white font-bold rounded-full hover:bg-[#f97316] hover:shadow-2xl hover:shadow-[#ff914d]/40 transition-all active:scale-95 group"
             >
-              Get Free Consultation <ArrowRight className="h-5 w-5" />
+              Get Free Consultation 
+              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
 
             <a
-              href="https://wa.me/8801700000000"
+              href="https://wa.me/8801819288583"
               target="_blank"
-              rel="noreferrer"
-              className="inline-flex h-14 items-center justify-center whitespace-nowrap rounded-full bg-[#25D366] px-8 text-sm md:text-base font-semibold text-white shadow-lg shadow-[#25D366]/20 hover:bg-[#25D366]/90 transition-all hover:scale-105 gap-2"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-10 py-5 bg-[#22c55e] text-white font-bold rounded-full hover:bg-[#16a34a] hover:shadow-2xl hover:shadow-[#22c55e]/40 transition-all active:scale-95"
             >
-              <MessageCircle className="h-5 w-5" /> WhatsApp Now
+              <MessageCircle className="h-5 w-5 fill-white/20" /> 
+              WhatsApp Now
             </a>
+          </div>
+
+          {/* Trust Badges */}
+          <div className="mt-12 flex items-center gap-5">
+            <div className="flex -space-x-3">
+              {[1, 2, 4, 3].map((i) => (
+                <div
+                  key={i}
+                  className="h-10 w-10 rounded-full bg-[#064e3b] border-2 border-[#fff7f0] flex items-center justify-center text-[10px] text-white font-black shadow-sm"
+                >
+                  {String.fromCharCode(64 + i)}
+                </div>
+              ))}
+            </div>
+            <div>
+              <div className="flex text-[#f97316] mb-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                ))}
+              </div>
+              <p className="text-xs font-bold text-[#064e3b]/60 uppercase tracking-widest">
+                100+ happy brands grown
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-4 px-2">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="rounded-2xl bg-white py-8 px-4 text-center shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
-            >
-              <div className="font-display text-3xl md:text-[32px] font-bold text-[#7a48fb]">
-                {s.value}
-              </div>
-              <div className="mt-2 text-sm text-slate-500 font-medium">{s.label}</div>
+        {/* --- Right Visual Section (Optimized Image) --- */}
+        <div className="relative animate-fade-in-slow">
+          <div className="relative bg-white rounded-[3.5rem] p-4 shadow-[-20px_40px_80px_-15px_rgba(0,0,0,0.1)] border border-white">
+            <div className="relative overflow-hidden rounded-[3rem] bg-white aspect-square flex items-center justify-center">
+                {/* Next.js Optimized Image */}
+                <Image 
+                  src="/assets/hero-bg.jpg"
+                  alt="Beyond Dhaka Growth Illustration" 
+                  width={800}
+                  height={800}
+                  priority
+                  className="w-[90%] h-auto object-contain"
+                />
             </div>
-          ))}
+
+            {/* Lead Growth Card */}
+            <div className="absolute -bottom-8 -left-10 bg-white rounded-3xl shadow-2xl p-6 flex items-center gap-4 border border-gray-50/50 animate-float">
+              <div className="h-14 w-14 rounded-2xl bg-[#ff914d]/10 flex items-center justify-center">
+                <TrendingUp className="h-7 w-7 text-[#ff914d]" />
+              </div>
+              <div>
+                <div className="text-3xl font-black text-[#064e3b] leading-none tracking-tighter">+248%</div>
+                <div className="text-[11px] uppercase font-bold text-[#064e3b]/40 tracking-wider mt-1.5">Avg. lead growth</div>
+              </div>
+            </div>
+
+            {/* ROI Card */}
+            <div className="absolute -top-6 -right-6 bg-[#14532d] text-[#ff914d] rounded-2xl shadow-2xl px-6 py-5 flex flex-col items-center animate-float-delayed">
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70 mb-1">Live ROI</div>
+              <div className="font-black text-3xl tracking-tighter">5.4x</div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-float {
+          animation: float 5s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float 6s ease-in-out infinite 1s;
+        }
+        .animate-fade-up {
+          animation: fadeUp 1s ease-out forwards;
+        }
+        .animate-fade-in-slow {
+          animation: fadeUp 1.5s ease-out forwards;
+        }
+      `}</style>
     </section>
   );
 };
