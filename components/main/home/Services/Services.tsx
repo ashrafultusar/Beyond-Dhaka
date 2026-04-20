@@ -2,56 +2,52 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { servicesData } from "@/data/servicesData";
+import ServiceCard from "@/components/Card/ServiceCard";
 
 
 const Services = () => {
-  
-  const featuredServices = servicesData.slice(0, 3);
+
+  const featuredServices = servicesData.slice(0, 6);
 
   return (
     <section className="py-24 bg-[#fafcff]">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-6 ">
+        
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-[40px] md:text-[44px] font-bold text-[#0f172a] mb-4 tracking-tight">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <p className="text-[#f96f1f] font-bold uppercase tracking-[0.2em] text-[13px] mb-3 ">
             What we do
+          </p>
+          <h2 className="text-[36px] md:text-[48px] font-extrabold text-[#0d6335] mb-4 tracking-tight leading-tight uppercase">
+            Services that drive real growth
           </h2>
-          <p className="text-[#64748b] text-[15px] max-w-2xl mx-auto font-medium">
-            End-to-end services designed to grow your business and bring real leads.
+          <p className="text-[#64748b] text-lg font-medium">
+            Digital marketing and visual design — engineered for results.
           </p>
         </div>
 
-        {/* Services Grid (Only 3 items) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {/* Services Grid (6 items) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {featuredServices.map((service) => (
-            <div
+            <ServiceCard 
               key={service.id}
-              className="bg-white rounded-[24px] p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300"
-            >
-              {/* Icon Box */}
-              <div className="w-[52px] h-[52px] rounded-[14px] bg-[#7a48fb] flex items-center justify-center mb-6">
-                {service.icon}
-              </div>
-
-              {/* Card Content */}
-              <h3 className="text-[19px] font-bold text-[#0f172a] mb-3">
-                {service.title}
-              </h3>
-              <p className="text-[14px] text-[#64748b] leading-[1.6]">
-                {service.description}
-              </p>
-            </div>
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+            />
           ))}
         </div>
 
-        {/* View All Button */}
+        
         <div className="flex justify-center">
           <Link href="/services">
-            <button className="flex cursor-pointer items-center gap-2 px-6 py-2.5 bg-transparent text-[#0f172a] text-[14px] font-medium border border-[#c4a6fb] rounded-full hover:bg-purple-50 transition-colors">
-              View All Services <ArrowRight size={16} className="text-[#0f172a]" />
+            <button className="group flex cursor-pointer items-center gap-3 px-8 py-3.5 bg-transparent text-[#11502e] text-[15px] font-bold border-2 border-[#0d6335]/20 rounded-full hover:bg-[#11502e] hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-[#7a48fb]/30">
+              Explore All Services 
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </Link>
         </div>
+
       </div>
     </section>
   );

@@ -2,7 +2,6 @@
 
 import {
   LayoutDashboard,
-  Stethoscope,
   CalendarCheck,
   ChevronRight,
   ChevronLeft,
@@ -11,6 +10,7 @@ import {
  
   Image as ImageIcon,
   LogOut,
+  Grid,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -25,7 +25,7 @@ const mainMenuItems = [
   },
   {
     name: "Manage Portfolio",
-    icon: Stethoscope,
+    icon: Grid,
     href: "/dhaka-staff-portal/portfolio",
   },
   
@@ -48,9 +48,9 @@ export default function Sidebar() {
       <div className="lg:hidden flex items-center justify-between px-5 py-4 bg-[#0f172a] text-white sticky top-0 z-[60] shadow-md w-full border-b border-white/5">
         <div className="flex items-center gap-3">
           <div className="bg-teal-500 p-1.5 rounded-lg">
-            <Stethoscope size={20} className="text-white" />
+            <Grid size={20} className="text-white" />
           </div>
-          <span className="font-bold tracking-tight">Dhaka STAFF</span>
+          <span className="font-bold tracking-tight">Beyond Dhaka</span>
         </div>
 
         <button
@@ -89,7 +89,7 @@ export default function Sidebar() {
           {/* Sidebar Logo Section */}
           <div className="relative flex items-center h-20 px-6 mb-4 mt-2">
             <div className="bg-teal-500 p-2.5 rounded-xl shrink-0 shadow-lg shadow-teal-500/20">
-              <Stethoscope size={26} className="text-white" />
+              <Grid size={26} className="text-white" />
             </div>
             <div
               className={`ml-4 transition-all duration-300 ${!isOpen
@@ -97,8 +97,8 @@ export default function Sidebar() {
                   : "opacity-100 visible"
                 }`}
             >
-              <h1 className="text-lg font-black text-white leading-none">
-                Dhaka<span className="text-teal-400">STAFF</span>
+              <h1 className="text-lg font-black text-white leading-none uppercase">
+              Beyond <span className="text-teal-400">Dhaka</span>
               </h1>
               <p className="text-[10px] text-teal-500 font-bold uppercase tracking-[1px] mt-1">
                 Admin Portal

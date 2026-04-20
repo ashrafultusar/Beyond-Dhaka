@@ -1,170 +1,185 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Phone, Menu, X, LogOut, LayoutDashboard } from "lucide-react";
+import { Menu, X, Phone, LogOut, LayoutDashboard } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
+import Image from "next/image";
 
-const LandingPage = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const navItems = [
+  { to: "/", label: "Home" },
+  { to: "/services", label: "Services" },
+  { to: "/portfolio", label: "Portfolio" },
+  { to: "/contact", label: "Contact" },
+];
+
+const Header = () => {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { data: session } = useSession();
   const pathname = usePathname();
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Portfolio", href: "/portfolio" },
-    { name: "Contact", href: "/contact" },
-  ];
+  // চেক করছি ইউজার হোম পেজে আছে কিনা
+  const isHome = pathname === "/";
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => setOpen(false), [pathname]);
+
+  // যদি হোম পেজ না হয়, অথবা স্ক্রল করা হয়, তাহলে ব্যাকগ্রাউন্ড সাদা হবে
+  const isWhiteBg = !isHome || scrolled;
 
   return (
-    <nav className="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
-      <div className="container mx-auto flex items-center justify-between px-6 py-4">
-        {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-10 h-10 bg-[#2A9D8F] text-white font-bold text-xl rounded-lg">
-            BD
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        isWhiteBg ? "bg-white shadow-md border-b border-gray-100" : "bg-transparent"
+      }`}
+    >
+      <div className="container flex items-center justify-between h-20 px-6 mx-auto">
+        {/* --- Logo --- */}
+        <Link href="/" className="flex items-center group">
+          <Image src='/assets/logo.png' alt="Logo" width={70} height={44} className="transition-transform group-hover:scale-105" />
+          <div className="leading-tight hidden sm:block ml-2">
+            <div className="font-bold text-[#0d6335] text-lg">BEYOND</div>
+            <div className="font-bold text-[#f96f1f] text-lg -mt-1">DHAKA</div>
           </div>
-          <span className="text-xl text-black font-bold tracking-tight">
-            Beyond Dhaka
-          </span>
-          
-        </div>
+        </Link>
 
-        {/* Desktop Nav Links */}
-        <ul className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+        {/* --- Desktop Nav --- */}
+        <nav className="hidden lg:flex items-center gap-2">
+          {navItems.map((item) => {
+            const isActive = pathname === item.to;
             return (
-              <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className={`font-medium transition-colors ${
-                    isActive ? "text-[#2A9D8F]" : "text-[#667085] hover:text-[#2A9D8F]"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Action Buttons */}
-        <div className="flex items-center gap-4">
-          {/* Admin Dashboard & Logout - Only visible when logged in */}
-          {session?.user?.role === "admin" && (
-            <div className="hidden sm:flex items-center gap-2">
-             <Link
-                href="/dhaka-staff-portal"
-                onClick={() => setIsMenuOpen(false)}
-                className={`flex items-center gap-3 p-4 font-semibold rounded-xl transition-all ${
-                  pathname === "/dhaka-staff-portal" 
-                    ? "bg-[#2A9D8F] text-white" 
-                    : "text-[#2A9D8F] hover:bg-[#2A9D8F]/5"
+              <Link
+                key={item.to}
+                href={item.to}
+                className={`px-5 py-2 text-sm font-semibold transition-all rounded-full ${
+                  isActive ? "text-[#0d6335] bg-[#f96f1f]/10" : "text-gray-600 hover:text-[#0d6335]"
                 }`}
               >
-                <LayoutDashboard size={20} />
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* --- Actions --- */}
+        <div className="flex items-center gap-3">
+          {session?.user?.role === "admin" && (
+            <div className="hidden md:flex items-center gap-2 mr-2 border-r pr-3 border-gray-200">
+              <Link 
+                href="/dhaka-staff-portal"
+                className="flex items-center gap-2 px-3 py-2 text-sm font-bold text-[#0d6335] hover:bg-[#0d6335]/10 rounded-lg transition-all"
+              >
+                <LayoutDashboard size={18} />
                 Dashboard
               </Link>
-              
               <button
                 onClick={() => signOut()}
-                className="p-2.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
-                title="Logout"
+                className="p-2 text-red-500 cursor-pointer hover:text-red-500 transition-colors"
               >
                 <LogOut size={20} />
               </button>
             </div>
           )}
 
-          {/* Book Now Button (Always Visible) */}
-          <button className="flex items-center gap-2 px-6 py-2.5 bg-[#2A9D8F] text-white font-semibold rounded-xl hover:bg-[#23857a] transition-all shadow-sm">
-            <Phone size={18} fill="currentColor" />
-            <span className="hidden xs:block">Book Now</span>
-          </button>
+          <Link
+            href="/contact"
+            className="hidden sm:flex items-center gap-1 px-4 py-2 bg-[#fb7f2b] text-white font-bold rounded-xl hover:bg-[#0d6335] transition-all active:scale-95"
+          >
+            <Phone size={18} />
+            <span>Get Started</span>
+          </Link>
 
-          {/* Mobile Menu Trigger */}
+          {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-gray-600"
-            onClick={() => setIsMenuOpen(true)}
+            className={`lg:hidden p-2 rounded-lg transition-colors ${
+              isWhiteBg ? "text-[#0d6335] hover:bg-gray-100" : "text-white bg-black/20 hover:bg-black/40"
+            }`}
+            onClick={() => setOpen(true)}
           >
             <Menu size={28} />
           </button>
         </div>
       </div>
 
-      {/* Mobile Sidebar Overlay */}
+      {/* --- Mobile Sidebar --- */}
+      {/* Overlay: (Background Blur only for the overlay area) */}
       <div
-        className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-50 transition-opacity duration-300 lg:hidden ${
-          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
-        onClick={() => setIsMenuOpen(false)}
+        onClick={() => setOpen(false)}
       />
 
-      {/* Mobile Sidebar Content */}
+      {/* Sidebar Content: Solid White Background (No transparency) */}
       <div
-        className={`fixed top-0 right-0 h-full w-[300px] bg-white z-50 shadow-2xl transform transition-transform duration-500 lg:hidden ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 right-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-500 ease-in-out ${
+          open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-6 flex justify-between items-center border-b">
-          <span className="font-bold text-lg">Menu</span>
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            className="flex items-center gap-2 px-3 py-1.5 border rounded-lg text-sm hover:bg-gray-50"
-          >
-            Close <X size={18} />
+        <div className="p-6 flex justify-between items-center border-b border-gray-100 bg-white">
+          <div className="flex items-center gap-2">
+             <Image src='/assets/logo.png' alt="Logo" width={40} height={25} />
+             <span className="font-bold text-gray-800">Menu</span>
+          </div>
+          <button onClick={() => setOpen(false)} className="p-2 hover:bg-gray-100 rounded-full text-gray-500 transition-colors">
+            <X size={24} />
           </button>
         </div>
         
-        <ul className="p-6 flex flex-col gap-3">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <li key={link.name}>
-                <Link
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block p-4 rounded-xl font-medium transition-all ${
-                    isActive ? "bg-[#2A9D8F]/10 text-[#2A9D8F]" : "text-gray-600 hover:bg-gray-50"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            );
-          })}
+        <div className="p-6 flex flex-col gap-2 bg-white">
+          {navItems.map((item) => (
+            <Link
+              key={item.to}
+              href={item.to}
+              className={`block p-4 rounded-xl font-semibold transition-colors ${ 
+                pathname === item.to 
+                  ? "bg-[#0d6335]/10 text-[#0d6335]" 
+                  : "text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
 
-          {/* Mobile Admin Section - Only visible when logged in */}
+          {/* Admin Options in Mobile */}
           {session?.user?.role === "admin" && (
-            <li className="mt-4 border-t pt-4 flex flex-col gap-2">
+            <div className="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-2">
               <Link
                 href="/dhaka-staff-portal"
-                onClick={() => setIsMenuOpen(false)}
-                className={`flex items-center gap-3 p-4 font-semibold rounded-xl transition-all ${
-                  pathname === "/dhaka-staff-portal" 
-                    ? "bg-[#2A9D8F] text-white" 
-                    : "text-[#2A9D8F] hover:bg-[#2A9D8F]/5"
-                }`}
+                className="flex items-center gap-3 p-4 font-bold text-[#0d6335] bg-[#0d6335]/5 rounded-xl"
               >
                 <LayoutDashboard size={20} />
-                Dashboard
+                Admin Dashboard
               </Link>
               <button
                 onClick={() => signOut()}
-                className="flex items-center gap-3 p-4 text-red-500 font-semibold hover:bg-red-50 rounded-xl transition-all w-full text-left"
+                className="flex items-center gap-3 p-4 text-red-500 cursor-pointer 
+                font-semibold hover:bg-red-50 rounded-xl w-full text-left transition-colors"
               >
                 <LogOut size={20} />
                 Logout
               </button>
-            </li>
+            </div>
           )}
-        </ul>
+
+          <Link
+            href="/contact"
+            className="mt-6 flex justify-center items-center py-4 bg-[#fb7f2b] text-white font-bold rounded-xl shadow-md active:scale-95 transition-transform"
+          >
+            Get Started
+          </Link>
+        </div>
       </div>
-    </nav>
+    </header>
   );
 };
 
-export default LandingPage;
+export default Header;
