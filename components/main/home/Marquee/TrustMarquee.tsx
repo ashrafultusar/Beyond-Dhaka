@@ -14,7 +14,7 @@ const TrustMarquee: React.FC = () => {
   ];
 
   return (
-    <section className="border-y border-gray-200 bg-[#f9fafb]/40 overflow-hidden py-6">
+    <section className="border-y border-gray-200 bg-white overflow-hidden py-6">
       <div className="relative overflow-hidden">
         {/* Marquee Wrapper */}
         <div className="animate-marquee-container">
