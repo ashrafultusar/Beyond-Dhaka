@@ -1,5 +1,6 @@
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/Navbar';
+import WhatsAppWidget from '@/components/WhatsAppWidget';
 import React from 'react';
 
 interface LayoutProps {
@@ -16,7 +17,7 @@ const MainLayout = ({ children }: LayoutProps) => {
             <main className="flex-grow">
                 {children}
             </main>
-
+            <WhatsAppWidget />
             {/* Common Footer */}
             <Footer />
         </div>
