@@ -24,7 +24,7 @@ const DynamicCTA: React.FC<DynamicCTAProps> = ({
 }) => {
   return (
     <section className="py-12">
-      <div className="container mx-auto ">
+      <div className="container mx-auto bg-white ">
         <div className={`relative overflow-hidden rounded-[32px] bg-gradient-to-r ${gradientClass} px-6 py-16 text-center shadow-xl`}>
           
           {/* Background Glows */}

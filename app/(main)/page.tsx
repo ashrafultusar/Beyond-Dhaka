@@ -18,7 +18,7 @@ const Home = async () => {
       <TrustMarquee />
       <Services />
 
-      <div className="container mx-auto px-6  py-20">
+      <div className="container mx-auto px-6 bg-white py-20">
         <p className="text-[#f96f1f] font-bold text-center uppercase tracking-[0.2em] text-[13px]">
           Recent work
         </p>
