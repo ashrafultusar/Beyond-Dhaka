@@ -14,12 +14,12 @@ const Services = () => {
       <div className="container mx-auto px-6 ">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-16">
           <p className="text-[#f96f1f] font-bold uppercase tracking-[0.2em] text-[13px] mb-3 ">
             What we do
           </p>
           <h2 className="text-[36px] md:text-[48px] font-extrabold text-[#0d6335] mb-4 tracking-tight leading-tight uppercase">
-            Services that drive real growth
+          Services that generate real revenue
           </h2>
           <p className="text-[#64748b] text-lg font-medium">
             Digital marketing and visual design — engineered for results.

@@ -94,7 +94,7 @@ const Header = () => {
             className="hidden sm:flex items-center gap-1 px-4 py-2 bg-[#fb7f2b] text-white font-bold rounded-xl hover:bg-[#0d6335] transition-all active:scale-95"
           >
             <Phone size={18} />
-            <span>Get Started</span>
+            <span>Get Free Consultation</span>
           </Link>
 
           {/* Mobile Menu Button */}
@@ -174,7 +174,8 @@ const Header = () => {
             href="/contact"
             className="mt-6 flex justify-center items-center py-4 bg-[#fb7f2b] text-white font-bold rounded-xl shadow-md active:scale-95 transition-transform"
           >
-            Get Started
+         Get Free Consultation
+
           </Link>
         </div>
       </div>
