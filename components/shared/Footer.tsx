@@ -95,7 +95,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-[12px] md:text-sm font-medium">
           <p>© {new Date().getFullYear()} Beyond Dhaka. All rights reserved.</p>
           <p className="flex items-center gap-1">
-            Crafted with care in <span className="text-white/60">Dhaka BD</span>
+            Crafted with care in <span className="text-white/60">Beyond Dhaka</span>
           </p>
         </div>
       </div>
