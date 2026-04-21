@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { servicesData } from "@/data/servicesData";
@@ -19,7 +18,7 @@ const Services = () => {
             What we do
           </p>
           <h2 className="text-[36px] md:text-[48px] font-extrabold text-[#0d6335] mb-4 tracking-tight leading-tight uppercase">
-          Services that generate real revenue
+          Our services that generate real revenue (Not just traffic)
           </h2>
           <p className="text-[#64748b] text-lg font-medium">
             Digital marketing and visual design — engineered for results.

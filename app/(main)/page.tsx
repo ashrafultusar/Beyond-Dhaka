@@ -7,6 +7,7 @@ import CallToAction from "@/components/shared/CallToAction/CallToAction";
 import PortfolioGrid from "@/components/Card/PortfolioGrid/PortfolioGrid";
 import { connectDB } from "@/db/dbConfig";
 import Portfolio from "@/models/Portfolio";
+import HeroBottom from "@/components/main/home/HeroBottom/HeroBottom";
 
 const Home = async () => {
   await connectDB();
@@ -15,6 +16,7 @@ const Home = async () => {
   return (
     <div>
       <Hero />
+      <HeroBottom/>
       <TrustMarquee />
       <Services />
 
@@ -40,7 +42,7 @@ const Home = async () => {
         primaryBtnLink="/contact"
         secondaryBtnText="WhatsApp Now"
         secondaryBtnLink="https://wa.me/8801700000000"
-       gradientClass="from-[#0d5435] via-[#0b4129] to-[#083320]"
+        gradientClass="from-[#0d5435] via-[#0b4129] to-[#083320]"
       />
     </div>
   );
