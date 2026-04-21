@@ -18,7 +18,7 @@ const Services = () => {
             What we do
           </p>
           <h2 className="text-[36px] md:text-[48px] font-extrabold text-[#0d6335] mb-4 tracking-tight leading-tight uppercase">
-          Our services that generate real revenue (Not just traffic)
+          Our Full Suite of Services grow online
           </h2>
           <p className="text-[#64748b] text-lg font-medium">
             Digital marketing and visual design — engineered for results.

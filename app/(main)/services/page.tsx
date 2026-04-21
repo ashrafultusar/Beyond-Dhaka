@@ -18,8 +18,9 @@ const AllServicesPage = () => {
 
             {/* Main Heading */}
             <h1 className="text-[42px] md:text-[56px] lg:text-[64px] leading-[1.1] font-extrabold text-white mb-6 uppercase tracking-tight">
-              Our Full Suite of Services{" "}
-              <span className="text-[#f96f1f]">grow online</span>
+            Our services that generate real revenue 
+
+              <span className="text-[#f96f1f]"> Not just traffic</span>
             </h1>
 
             {/* Subtitle / Paragraph */}
