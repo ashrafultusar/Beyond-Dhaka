@@ -64,10 +64,12 @@ const HeroSection: React.FC = () => {
             <div>
              
               <p className="text-xs font-bold text-[#064e3b]/60 uppercase tracking-widest">
-              ✔ 100+ brands served
+              ✔ 100+ HAPPY LOCAL & INTERNATIONAL CLIENTS 
+
               </p>
               <p className="text-xs font-bold text-[#064e3b]/60 uppercase tracking-widest">
-              ✔ Results-driven strategy
+              ✔ Proven Growth Strategy
+
               </p>
             </div>
           </div>
