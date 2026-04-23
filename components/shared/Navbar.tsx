@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, LogOut, LayoutDashboard } from "lucide-react";
+import { Menu, X, Phone, LogOut, LayoutDashboard, ArrowRight } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 
@@ -89,13 +89,21 @@ const Header = () => {
             </div>
           )}
 
-          <Link
-            href="/contact"
-            className="hidden sm:flex items-center gap-1 px-4 py-2 bg-[#fb7f2b] text-white font-bold rounded-xl hover:bg-[#0d6335] transition-all active:scale-95"
-          >
-            <Phone size={18} />
-            <span>Get Free Consultation</span>
-          </Link>
+<Link
+    href="/contact"
+    className="hidden sm:flex group items-center gap-2 py-2.5 px-5 border-2 border-[#fb7f2b] text-[#fb7f2b] font-bold text-sm rounded-full shadow-sm overflow-hidden relative transition-all duration-300 hover:bg-[#fb7f2b] hover:text-white active:scale-95"
+  >
+    {/* Gradient Overlay */}
+    <span className="absolute inset-0 bg-gradient-to-r from-[#fb7f2b] to-[#ff9d5c] opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+    
+    <span className="relative z-10 flex items-center gap-2">
+      Consultation
+      <ArrowRight 
+        size={16} 
+        className="transition-transform duration-300 group-hover:translate-x-1" 
+      />
+    </span>
+  </Link>
 
           {/* Mobile Menu Button */}
           <button
@@ -170,13 +178,21 @@ const Header = () => {
             </div>
           )}
 
-          <Link
-            href="/contact"
-            className="mt-6 flex justify-center items-center py-4 bg-[#fb7f2b] text-white font-bold rounded-xl shadow-md active:scale-95 transition-transform"
-          >
-         Get Free Consultation
-
-          </Link>
+<Link
+    href="/contact"
+    className="hidden sm:flex group items-center gap-2 py-2.5 px-5 border-2 border-[#fb7f2b] text-[#fb7f2b] font-bold text-sm rounded-full shadow-sm overflow-hidden relative transition-all duration-300 hover:bg-[#fb7f2b] hover:text-white active:scale-95"
+  >
+    {/* Gradient Overlay */}
+    <span className="absolute inset-0 bg-gradient-to-r from-[#fb7f2b] to-[#ff9d5c] opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+    
+    <span className="relative z-10 flex items-center gap-2">
+      Consultation
+      <ArrowRight 
+        size={16} 
+        className="transition-transform duration-300 group-hover:translate-x-1" 
+      />
+    </span>
+  </Link>
         </div>
       </div>
     </header>
