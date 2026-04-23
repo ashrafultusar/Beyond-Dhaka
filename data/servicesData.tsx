@@ -1,6 +1,10 @@
 import React from "react";
 import { TrendingUp, Sparkles, Target, Monitor, PenTool, Search } from "lucide-react";
 
+// Title/categoryName theke URL-safe slug generate kore
+export const generateSlug = (title: string) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
 export const servicesData = [
   {
     id: 1,

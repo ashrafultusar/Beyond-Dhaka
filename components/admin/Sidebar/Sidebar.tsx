@@ -28,6 +28,11 @@ const mainMenuItems = [
     icon: Grid,
     href: "/dhaka-staff-portal/portfolio",
   },
+  {
+    name: "Services",
+    icon: Grid,
+    href: "/dhaka-staff-portal/services",
+  },
   
 
   {

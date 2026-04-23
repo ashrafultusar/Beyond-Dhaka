@@ -6,7 +6,7 @@ import { ArrowLeft, Image as ImageIcon, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 export default function AddPortfolio() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
