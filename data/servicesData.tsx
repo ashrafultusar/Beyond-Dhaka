@@ -2,11 +2,11 @@ import { TrendingUp, Sparkles, Target, Monitor, PenTool, Search } from "lucide-r
 
 export const generateSlug = (title: string) =>
   title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-
+ 
 export const servicesData = [
   {
     id: 1,
-    title: "Digital Marketing",
+    title: "Digital Marketing", 
     description: "Grow your brand visibility and attract the right customers through data-driven marketing.",
     subTitle: "Focused on real growth, not just reach.", 
     features: [

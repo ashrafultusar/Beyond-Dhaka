@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Trash2, ExternalLink, PencilLine } from "lucide-react";
+import { Plus, Trash2, ExternalLink } from "lucide-react";
 import { connectDB } from "@/db/dbConfig";
 import Portfolio from "@/models/Portfolio";
 import { deletePortfolioAction } from "@/actions/portfolioActions";
@@ -14,7 +14,9 @@ export default async function ManagePortfolio() {
       {/* Header Section */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Portfolio Management</h1>
+          <h1 className="text-2xl font-bold text-gray-800">
+            Portfolio Management
+          </h1>
           <p className="text-gray-500">Manage your showcase projects</p>
         </div>
         <Link
@@ -29,20 +31,24 @@ export default async function ManagePortfolio() {
       {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
-          <div key={project._id.toString()} className="bg-white  rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <div
+            key={project._id.toString()}
+            className="bg-white  rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+          >
             {/* Image Preview */}
             <div className="relative h-48 w-full bg-gray-100">
               {project.image ? (
                 <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover"
-                
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
               ) : (
-                <div className="flex items-center justify-center h-full text-gray-400 text-xs">No Image Preview</div>
+                <div className="flex items-center justify-center h-full text-gray-400 text-xs">
+                  No Image Preview
+                </div>
               )}
               <div className="absolute top-3 right-3">
                 <span className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold text-[#2A9D8F] shadow-sm uppercase">
@@ -53,11 +59,26 @@ export default async function ManagePortfolio() {
 
             {/* Content Section */}
             <div className="p-5">
-              <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">{project.title}</h3>
+              <div className="flex justify-between items-start mb-1">
+                {" "}
+                <h3 className="font-bold text-lg text-gray-800 mb-1 truncate">
+                  {project.title}
+                </h3>
+                <div className="relative w-6 h-4 flex-shrink-0 mt-1.5 border border-gray-100 shadow-sm overflow-hidden rounded-sm">
+                  <Image
+                    src={project.countryFlag}
+                    alt="Country Flag"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
               {project.projectUrl && (
                 <p className="text-sm text-gray-500 flex items-center gap-1 mb-4">
                   <ExternalLink size={14} />
-                  <span className="truncate">{new URL(project.projectUrl).hostname}</span>
+                  <span className="truncate">
+                    {new URL(project.projectUrl).hostname}
+                  </span>
                 </p>
               )}
 
@@ -68,22 +89,19 @@ export default async function ManagePortfolio() {
                 </span>
 
                 <div className="flex items-center gap-2">
-                  {/* Edit Button */}
-                  <Link
-                    href={`/dhaka-staff-portal/portfolio/edit/${project._id.toString()}`}
-                    className="p-2 text-[#2A9D8F] hover:bg-teal-50 rounded-lg transition-colors"
-                  >
-                    <PencilLine size={20} />
-                  </Link>
+                
+                 
 
                   {/* Delete Button */}
-                  <form action={async () => {
-                    "use server";
-                    await deletePortfolioAction(project._id.toString());
-                  }}>
+                  <form
+                    action={async () => {
+                      "use server";
+                      await deletePortfolioAction(project._id.toString());
+                    }}
+                  >
                     <button
                       type="submit"
-                      className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                      className="p-2 cursor-pointer  text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                     >
                       <Trash2 size={20} />
                     </button>
