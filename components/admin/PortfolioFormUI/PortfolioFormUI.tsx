@@ -51,22 +51,43 @@ export default function PortfolioFormUI({ initialData, loading, isEdit }: FormUI
         </div>
       </div>
 
-      <div className="space-y-2">
-        <label className="text-sm font-semibold text-gray-700">
-          {isEdit ? "Update Image (Optional)" : "Project Thumbnail"}
-        </label>
-        <div className="relative border-2 border-dashed border-gray-200 rounded-2xl p-10 hover:bg-gray-50 transition-all text-center group">
-          <input
-            type="file"
-            name="image"
-            required={!isEdit}
-            accept="image/*"
-            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-          />
-          <div className="flex flex-col items-center justify-center gap-2 text-gray-400 group-hover:text-[#2A9D8F]">
-            <ImageIcon size={40} strokeWidth={1.5} />
-            <p className="text-sm font-medium">Click to upload or drag & drop</p>
-            <p className="text-xs">Recommended size: 1200x800px</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label className="text-sm font-semibold text-gray-700">
+            {isEdit ? "Update Country Flag (Optional)" : "Country Flag"}
+          </label>
+          <div className="relative border-2 border-dashed border-gray-200 rounded-2xl p-8 hover:bg-gray-50 transition-all text-center group">
+            <input
+              type="file"
+              name="countryFlag"
+              accept="image/*"
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+            />
+            <div className="flex flex-col items-center justify-center gap-2 text-gray-400 group-hover:text-[#2A9D8F]">
+              <span className="text-4xl">🏳️</span>
+              <p className="text-sm font-medium">Upload Country Flag</p>
+              <p className="text-xs">PNG, JPG or SVG</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm font-semibold text-gray-700">
+            {isEdit ? "Update Image (Optional)" : "Project Thumbnail"}
+          </label>
+          <div className="relative border-2 border-dashed border-gray-200 rounded-2xl p-8 hover:bg-gray-50 transition-all text-center group">
+            <input
+              type="file"
+              name="image"
+              required={!isEdit}
+              accept="image/*"
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+            />
+            <div className="flex flex-col items-center justify-center gap-2 text-gray-400 group-hover:text-[#2A9D8F]">
+              <ImageIcon size={40} strokeWidth={1.5} />
+              <p className="text-sm font-medium">Click to upload or drag & drop</p>
+              <p className="text-xs">Recommended size: 1200x800px</p>
+            </div>
           </div>
         </div>
       </div>

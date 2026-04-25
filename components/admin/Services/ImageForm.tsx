@@ -71,6 +71,10 @@ const ImageForm = () => {
             <datalist id="categories">
               <option value="UI/UX Design" />
               <option value="Web Development" />
+              <option value="Digital Marketing" />
+              <option value="Image Editing" />
+              <option value="Lead Generation" />
+              <option value="SEO Optimization" />
             </datalist>
           </div>
 
