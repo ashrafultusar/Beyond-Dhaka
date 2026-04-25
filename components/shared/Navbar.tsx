@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, LogOut, LayoutDashboard, ArrowRight } from "lucide-react";
+import { Menu, X, LogOut, LayoutDashboard, ArrowRight } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 
@@ -20,7 +20,6 @@ const Header = () => {
   const { data: session } = useSession();
   const pathname = usePathname();
 
-  // চেক করছি ইউজার হোম পেজে আছে কিনা
   const isHome = pathname === "/";
 
   useEffect(() => {
@@ -32,7 +31,6 @@ const Header = () => {
 
   useEffect(() => setOpen(false), [pathname]);
 
-  // যদি হোম পেজ না হয়, অথবা স্ক্রল করা হয়, তাহলে ব্যাকগ্রাউন্ড সাদা হবে
   const isWhiteBg = !isHome || scrolled;
 
   return (
@@ -41,13 +39,17 @@ const Header = () => {
         isWhiteBg ? "bg-white shadow-md border-b border-gray-100" : "bg-transparent"
       }`}
     >
-      <div className="container flex items-center justify-between h-20 px-6 mx-auto">
-        {/* --- Logo --- */}
+      <div className="container flex items-center justify-between h-20 md:h-24 px-6 mx-auto">
+        {/* --- Logo Section --- */}
         <Link href="/" className="flex items-center group">
-          <Image src='/assets/logo.png' alt="Logo" width={70} height={44} className="transition-transform group-hover:scale-105" />
-          <div className="leading-tight hidden sm:block ml-2">
-            <div className="font-bold text-[#0d6335] text-lg">BEYOND</div>
-            <div className="font-bold text-[#f96f1f] text-lg -mt-1">DHAKA</div>
+          <div className="relative w-32 h-12 md:w-48 md:h-16 transition-transform group-hover:scale-105">
+            <Image 
+              src='/assets/logo.png' 
+              alt="Beyond Dhaka Logo" 
+              fill
+              priority
+              className="object-contain object-left" 
+            />
           </div>
         </Link>
 
@@ -82,43 +84,39 @@ const Header = () => {
               </Link>
               <button
                 onClick={() => signOut()}
-                className="p-2 text-red-500 cursor-pointer hover:text-red-500 transition-colors"
+                className="p-2 text-red-500 cursor-pointer hover:text-red-700 transition-colors"
               >
                 <LogOut size={20} />
               </button>
             </div>
           )}
 
-<Link
-    href="/contact"
-    className="hidden sm:flex group items-center gap-2 py-2.5 px-5 border-2 border-[#fb7f2b] text-[#fb7f2b] font-bold text-sm rounded-full shadow-sm overflow-hidden relative transition-all duration-300 hover:bg-[#fb7f2b] hover:text-white active:scale-95"
-  >
-    {/* Gradient Overlay */}
-    <span className="absolute inset-0 bg-gradient-to-r from-[#fb7f2b] to-[#ff9d5c] opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
-    
-    <span className="relative z-10 flex items-center gap-2">
-      Consultation
-      <ArrowRight 
-        size={16} 
-        className="transition-transform duration-300 group-hover:translate-x-1" 
-      />
-    </span>
-  </Link>
+          <Link
+            href="/contact"
+            className="hidden sm:flex group items-center gap-2 py-2.5 px-6 border-2 border-[#fb7f2b] text-[#fb7f2b] font-bold text-sm rounded-full shadow-sm overflow-hidden relative transition-all duration-300 hover:bg-[#fb7f2b] hover:text-white active:scale-95"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+             Get Free Consultation
+              <ArrowRight 
+                size={16} 
+                className="transition-transform duration-300 group-hover:translate-x-1" 
+              />
+            </span>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button
             className={`lg:hidden p-2 rounded-lg transition-colors ${
-              isWhiteBg ? "text-[#0d6335] hover:bg-gray-100" : "text-white bg-black/20 hover:bg-black/40"
+              isWhiteBg ? "text-[#0d6335] hover:bg-gray-100" : "text-[#0d6335] bg-white/80 hover:bg-white"
             }`}
             onClick={() => setOpen(true)}
           >
-            <Menu size={28} />
+            <Menu className="cursor-pointer" size={28} />
           </button>
         </div>
       </div>
 
       {/* --- Mobile Sidebar --- */}
-      {/* Overlay: (Background Blur only for the overlay area) */}
       <div
         className={`fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 ${
           open ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -126,23 +124,26 @@ const Header = () => {
         onClick={() => setOpen(false)}
       />
 
-      {/* Sidebar Content: Solid White Background (No transparency) */}
       <div
-        className={`fixed top-0 right-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-500 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-[300px] bg-white z-[70] shadow-2xl transform transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-6 flex justify-between items-center border-b border-gray-100 bg-white">
-          <div className="flex items-center gap-2">
-             <Image src='/assets/logo.png' alt="Logo" width={40} height={25} />
-             <span className="font-bold text-gray-800">Menu</span>
+        <div className="p-6 flex justify-between items-center border-b border-gray-100">
+          <div className="relative w-32 h-10">
+            <Image 
+              src='/assets/logo.png' 
+              alt="Logo" 
+              fill
+              className="object-contain object-left" 
+            />
           </div>
-          <button onClick={() => setOpen(false)} className="p-2 hover:bg-gray-100 rounded-full text-gray-500 transition-colors">
-            <X size={24} />
+          <button onClick={() => setOpen(false)} className="p-2 hover:bg-gray-100 rounded-full text-gray-500">
+            <X className="cursor-pointer" size={24} />
           </button>
         </div>
         
-        <div className="p-6 flex flex-col gap-2 bg-white">
+        <div className="p-6 flex flex-col gap-2">
           {navItems.map((item) => (
             <Link
               key={item.to}
@@ -157,7 +158,6 @@ const Header = () => {
             </Link>
           ))}
 
-          {/* Admin Options in Mobile */}
           {session?.user?.role === "admin" && (
             <div className="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-2">
               <Link
@@ -169,8 +169,7 @@ const Header = () => {
               </Link>
               <button
                 onClick={() => signOut()}
-                className="flex items-center gap-3 p-4 text-red-500 cursor-pointer 
-                font-semibold hover:bg-red-50 rounded-xl w-full text-left transition-colors"
+                className="flex items-center gap-3 p-4 text-red-500 font-semibold hover:bg-red-50 rounded-xl w-full text-left transition-colors"
               >
                 <LogOut size={20} />
                 Logout
@@ -178,21 +177,13 @@ const Header = () => {
             </div>
           )}
 
-<Link
-    href="/contact"
-    className="hidden sm:flex group items-center gap-2 py-2.5 px-5 border-2 border-[#fb7f2b] text-[#fb7f2b] font-bold text-sm rounded-full shadow-sm overflow-hidden relative transition-all duration-300 hover:bg-[#fb7f2b] hover:text-white active:scale-95"
-  >
-    {/* Gradient Overlay */}
-    <span className="absolute inset-0 bg-gradient-to-r from-[#fb7f2b] to-[#ff9d5c] opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
-    
-    <span className="relative z-10 flex items-center gap-2">
-      Consultation
-      <ArrowRight 
-        size={16} 
-        className="transition-transform duration-300 group-hover:translate-x-1" 
-      />
-    </span>
-  </Link>
+          <Link
+            href="/contact"
+            className="mt-4 flex items-center justify-center gap-2 py-3 px-5 bg-[#fb7f2b] text-white font-bold text-sm rounded-full shadow-lg"
+          >
+           Get Free Consultation
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </header>
