@@ -7,7 +7,6 @@ import CallToAction from "@/components/shared/CallToAction/CallToAction";
 import PortfolioGrid from "@/components/Card/PortfolioGrid/PortfolioGrid";
 import { connectDB } from "@/db/dbConfig";
 import Portfolio from "@/models/Portfolio";
-import PersonalBrand from "@/components/main/home/PersonalBrand/PersonalBrand";
 
 const Home = async () => {
   await connectDB();
@@ -19,7 +18,7 @@ const Home = async () => {
       <TrustMarquee />
 
       <Services />
-      <PersonalBrand />
+   
       <div className="container mx-auto px-6 bg-white py-20">
         <p className="text-[#f96f1f] font-bold text-center uppercase tracking-[0.2em] text-[13px]">
           Recent work
