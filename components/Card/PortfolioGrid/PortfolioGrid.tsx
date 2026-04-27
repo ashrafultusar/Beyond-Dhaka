@@ -29,9 +29,10 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({
     <div className="w-full">
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
         {displayedData.map((item) => (
-          <div
+          <Link
             key={item._id}
-            className="group cursor-pointer relative bg-white   overflow-hidden border border-[#e5f1e8] shadow-[0_5px_15px_-10px_rgba(17,80,46,0.05)] hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
+            href={`/portfolio/${item._id}`}
+            className="group cursor-pointer relative bg-white overflow-hidden border border-[#e5f1e8] shadow-[0_5px_15px_-10px_rgba(17,80,46,0.05)] hover:shadow-2xl transition-all duration-500 aspect-[4/5] block"
           >
             {/* Image Section */}
             <div className="absolute inset-0 w-full h-full">
@@ -56,7 +57,7 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({
               <div className="flex justify-between items-start mb-1">
                 <div className="flex items-center gap-2 text-white/80 text-[10px] md:text-sm font-medium border-t border-white/10 pt-3 md:pt-4">
                   View Project
-                  <ArrowRight size={14} className="text-[#f97316]" />
+                  <ArrowRight size={14} className="text-[#f97316] group-hover:translate-x-1 transition-transform" />
                 </div>
                 <div className="relative w-10 h-6 flex-shrink-0 mt-3.5 border border-gray-100 shadow-sm overflow-hidden rounded-sm">
                   <Image
@@ -68,7 +69,7 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
