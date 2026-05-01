@@ -6,6 +6,8 @@ const nextConfig = {
     },
   },
   images: {
+    loader: 'cloudinary', // এটি যোগ করুন
+    path: 'https://res.cloudinary.com/dzv04zugz/image/upload/', // এটি যোগ করুন
     remotePatterns: [
       {
         protocol: 'https',
