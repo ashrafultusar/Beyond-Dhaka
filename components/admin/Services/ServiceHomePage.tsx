@@ -8,14 +8,14 @@ import { toast } from "react-hot-toast";
 import { deleteService } from "@/actions/serviceAction";
 
 interface Service {
-    _id: string;
-    categoryName: string;
-    imageUrl: string;
-  }
+  _id: string;
+  categoryName: string;
+  imageUrl: string;
+}
 
 
 const ServiceHomePage = ({ initialServices }: { initialServices: Service[] }) => {
-  
+
   const [services, setServices] = useState<Service[]>(initialServices);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
@@ -40,7 +40,7 @@ const ServiceHomePage = ({ initialServices }: { initialServices: Service[] }) =>
       {services.map((service) => (
         <div key={service._id} className="border rounded-xl p-4">
           <div className="relative h-48 w-full">
-             <Image src={service.imageUrl} alt={service.categoryName} fill className="object-cover" />
+            <Image src={service.imageUrl} alt={service.categoryName} fill sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover" />
           </div>
           <div className="flex justify-between items-center mt-4">
             <h3>{service.categoryName}</h3>
