@@ -73,6 +73,7 @@ const PortfolioDetailPage = async ({
                                                 src={portfolio.countryFlag}
                                                 alt="Client Country"
                                                 fill
+                                                sizes="32px"
                                                 className="object-cover"
                                             />
                                         </div>

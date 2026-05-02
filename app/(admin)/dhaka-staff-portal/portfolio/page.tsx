@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Trash2, ExternalLink } from "lucide-react";
+import { Plus, Trash2, ExternalLink, Edit } from "lucide-react";
 import { connectDB } from "@/db/dbConfig";
 import Portfolio from "@/models/Portfolio";
 import { deletePortfolioAction } from "@/actions/portfolioActions";
@@ -69,6 +69,7 @@ export default async function ManagePortfolio() {
                     src={project.countryFlag}
                     alt="Country Flag"
                     fill
+                    sizes="32px"
                     className="object-cover"
                   />
                 </div>
@@ -89,8 +90,13 @@ export default async function ManagePortfolio() {
                 </span>
 
                 <div className="flex items-center gap-2">
-                
-                 
+                  {/* Edit Button */}
+                  <Link
+                    href={`/dhaka-staff-portal/portfolio/edit-portfolio/${project._id}`}
+                    className="p-2 cursor-pointer text-[#2A9D8F] hover:bg-[#2A9D8F]/10 rounded-lg transition-colors"
+                  >
+                    <Edit size={20} />
+                  </Link>
 
                   {/* Delete Button */}
                   <form
