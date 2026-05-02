@@ -30,6 +30,7 @@ const Footer = () => {
                     src="/assets/logo.png"
                     alt="Beyond Dhaka Logo"
                     fill
+                    sizes="128px"
                     priority
                     className="object-contain object-left"
                   />
@@ -94,42 +95,42 @@ const Footer = () => {
             </ul>
           </div>
 
-         {/* Column 3: Contact Info & Location */}
-<div className="md:col-span-3">
-  <h4 className="text-[#f97316] text-[13px] font-bold mb-6 tracking-[0.2em] uppercase">
-    Contact & Location
-  </h4>
-  <ul className="space-y-4 text-white/70 text-sm font-medium">
-    <li className="flex items-center gap-3 group cursor-pointer">
-      <FaPhoneAlt size={14} className="text-[#f97316]" />
-      <a href="tel:+8801819288583" className="group-hover:text-white transition-colors text-sm">
-        +880 1819 288 583
-      </a>
-    </li>
-    <li className="flex items-center gap-3 group cursor-pointer">
-      <FaEnvelope size={14} className="text-[#f97316]" />
-      <a href="mailto:info@beyonddhaka.com" className="group-hover:text-white transition-colors text-sm">
-        info@beyonddhaka.com
-      </a>
-    </li>
-    
-    {/* Updated Location Section with your Link */}
-    <li className="flex items-start gap-3 group cursor-pointer">
-      <FaMapMarkerAlt size={16} className="text-[#f97316] mt-1 shrink-0" />
-      <div className="flex flex-col gap-1">
-        <a 
-          href="https://maps.app.goo.gl/4qMLpMQrNpewLqju7" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="group-hover:text-white transition-colors underline underline-offset-4 decoration-white/20 text-sm leading-relaxed"
-        >
-          67/3, G7, Shantinagar, Dhaka 1217, Bangladesh
-          <FaExternalLinkAlt size={10} className="inline ml-2 opacity-50 group-hover:opacity-100" />
-        </a>
-      </div>
-    </li>
-  </ul>
-</div>
+          {/* Column 3: Contact Info & Location */}
+          <div className="md:col-span-3">
+            <h4 className="text-[#f97316] text-[13px] font-bold mb-6 tracking-[0.2em] uppercase">
+              Contact & Location
+            </h4>
+            <ul className="space-y-4 text-white/70 text-sm font-medium">
+              <li className="flex items-center gap-3 group cursor-pointer">
+                <FaPhoneAlt size={14} className="text-[#f97316]" />
+                <a href="tel:+8801819288583" className="group-hover:text-white transition-colors text-sm">
+                  +880 1819 288 583
+                </a>
+              </li>
+              <li className="flex items-center gap-3 group cursor-pointer">
+                <FaEnvelope size={14} className="text-[#f97316]" />
+                <a href="mailto:info@beyonddhaka.com" className="group-hover:text-white transition-colors text-sm">
+                  info@beyonddhaka.com
+                </a>
+              </li>
+
+              {/* Updated Location Section with your Link */}
+              <li className="flex items-start gap-3 group cursor-pointer">
+                <FaMapMarkerAlt size={16} className="text-[#f97316] mt-1 shrink-0" />
+                <div className="flex flex-col gap-1">
+                  <a
+                    href="https://maps.app.goo.gl/4qMLpMQrNpewLqju7"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group-hover:text-white transition-colors underline underline-offset-4 decoration-white/20 text-sm leading-relaxed"
+                  >
+                    67/3, G7, Shantinagar, Dhaka 1217, Bangladesh
+                    <FaExternalLinkAlt size={10} className="inline ml-2 opacity-50 group-hover:opacity-100" />
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
 
           {/* Column 4: Social Follow */}
           <div className="md:col-span-2">

@@ -1,26 +1,40 @@
 "use client";
 
-import { createPortfolioAction } from "@/actions/portfolioActions";
+import { updatePortfolioAction } from "@/actions/portfolioActions";
 import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, Image as ImageIcon, Loader2, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
-export default function AddPortfolio() {
+interface Portfolio {
+  _id: string;
+  title: string;
+  category: string;
+  projectUrl?: string;
+  image: string;
+  countryFlag: string;
+}
+
+export default function EditPortfolioForm({
+  portfolio,
+}: {
+  portfolio: Portfolio;
+}) {
   const [loading, setLoading] = useState(false);
-  const [flagPreview, setFlagPreview] = useState<string | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [flagPreview, setFlagPreview] = useState<string | null>(
+    portfolio.countryFlag || null
+  );
+  const [imagePreview, setImagePreview] = useState<string | null>(
+    portfolio.image || null
+  );
   const flagInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
-  const router = useRouter();
 
   useEffect(() => {
     return () => {
-      if (flagPreview) URL.revokeObjectURL(flagPreview);
-      if (imagePreview) URL.revokeObjectURL(imagePreview);
+      if (flagPreview?.startsWith("blob:")) URL.revokeObjectURL(flagPreview);
+      if (imagePreview?.startsWith("blob:")) URL.revokeObjectURL(imagePreview);
     };
   }, [flagPreview, imagePreview]);
 
@@ -31,7 +45,7 @@ export default function AddPortfolio() {
   ) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (oldUrl) URL.revokeObjectURL(oldUrl);
+      if (oldUrl?.startsWith("blob:")) URL.revokeObjectURL(oldUrl);
       const url = URL.createObjectURL(file);
       setter(url);
     }
@@ -42,7 +56,7 @@ export default function AddPortfolio() {
     inputRef: React.RefObject<HTMLInputElement | null>,
     oldUrl: string | null
   ) => {
-    if (oldUrl) URL.revokeObjectURL(oldUrl);
+    if (oldUrl?.startsWith("blob:")) URL.revokeObjectURL(oldUrl);
     setter(null);
     if (inputRef.current) inputRef.current.value = "";
   };
@@ -52,19 +66,13 @@ export default function AddPortfolio() {
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-    const result = await createPortfolioAction(formData);
+    const result = await updatePortfolioAction(portfolio._id, formData);
 
     if (result?.error) {
       toast.error(result.error);
       setLoading(false);
     } else {
-      toast.success("Project added successfully!");
-      if (flagPreview) URL.revokeObjectURL(flagPreview);
-      if (imagePreview) URL.revokeObjectURL(imagePreview);
-      setFlagPreview(null);
-      setImagePreview(null);
-      formRef.current?.reset();
-      // Action redirects but we also make sure Next doesn't block the button
+      toast.success("Project updated successfully!");
     }
   };
 
@@ -78,13 +86,9 @@ export default function AddPortfolio() {
       </Link>
 
       <div className="bg-white rounded-2xl border p-8 shadow-sm">
-        <h1 className="text-2xl text-black font-bold mb-6">Add New Project</h1>
+        <h1 className="text-black text-2xl font-bold mb-6">Edit Project</h1>
 
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="space-y-6"
-        >
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-700">
@@ -92,9 +96,10 @@ export default function AddPortfolio() {
               </label>
               <input
                 name="title"
+                defaultValue={portfolio.title}
                 required
                 placeholder="e.g. Real Estate App"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2A9D8F] focus:ring-2 text-black focus:ring-[#2A9D8F]/20 outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-black focus:border-[#2A9D8F] focus:ring-2 focus:ring-[#2A9D8F]/20 outline-none transition-all"
               />
             </div>
 
@@ -104,8 +109,9 @@ export default function AddPortfolio() {
               </label>
               <select
                 name="category"
+                defaultValue={portfolio.category}
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2A9D8F] focus:ring-2 text-black focus:ring-[#2A9D8F]/20 outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl border text-black border-gray-200 focus:border-[#2A9D8F] focus:ring-2 focus:ring-[#2A9D8F]/20 outline-none transition-all"
               >
                 <option value="UI/UX Design">UI/UX Design</option>
                 <option value="Image Editing">Image Editing</option>
@@ -123,9 +129,10 @@ export default function AddPortfolio() {
             </label>
             <input
               name="projectUrl"
+              defaultValue={portfolio.projectUrl}
               type="url"
               placeholder="https://example.com"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2A9D8F] focus:ring-2 text-black focus:ring-[#2A9D8F]/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2A9D8F] text-black  focus:ring-2 focus:ring-[#2A9D8F]/20 outline-none transition-all"
             />
           </div>
 
@@ -135,25 +142,31 @@ export default function AddPortfolio() {
                 Country Flag
               </label>
               <div
-                className={`relative rounded-xl p-6 transition-colors ${flagPreview
+                className={`relative rounded-xl p-6 transition-colors ${
+                  flagPreview
                     ? "border-2 border-[#2A9D8F] bg-gray-50"
-                    : "border-2 border-dashed border-gray-200 hover:bg-gray-50 hover:border-[#2A9D8F]/40"
-                  }`}
+                    : "border-2 border-dashed border-gray-200 hover:bg-gray-50"
+                }`}
               >
                 <input
                   ref={flagInputRef}
                   type="file"
                   name="countryFlag"
                   accept="image/*"
-                  onChange={(e) => handleFilePreview(e, setFlagPreview, flagPreview)}
-                  className={`absolute inset-0 w-full h-full opacity-0 cursor-pointer ${flagPreview ? "pointer-events-none" : ""
-                    }`}
+                  onChange={(e) =>
+                    handleFilePreview(e, setFlagPreview, flagPreview)
+                  }
+                  className={`absolute inset-0 w-full h-full opacity-0 cursor-pointer ${
+                    flagPreview ? "pointer-events-none" : ""
+                  }`}
                 />
                 {flagPreview ? (
                   <div className="flex flex-col items-center justify-center">
                     <button
                       type="button"
-                      onClick={() => clearPreview(setFlagPreview, flagInputRef, flagPreview)}
+                      onClick={() =>
+                        clearPreview(setFlagPreview, flagInputRef, flagPreview)
+                      }
                       className="absolute top-2 right-2 z-20 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
                     >
                       <X size={14} />
@@ -172,7 +185,7 @@ export default function AddPortfolio() {
                 ) : (
                   <div className="flex flex-col items-center justify-center gap-2 text-gray-400">
                     <span className="text-3xl">🏳️</span>
-                    <p className="text-sm">Upload Country Flag</p>
+                    <p className="text-sm">Upload New Flag</p>
                   </div>
                 )}
               </div>
@@ -183,26 +196,35 @@ export default function AddPortfolio() {
                 Thumbnail Image
               </label>
               <div
-                className={`relative rounded-xl p-6 transition-colors ${imagePreview
+                className={`relative rounded-xl p-6 transition-colors ${
+                  imagePreview
                     ? "border-2 border-[#2A9D8F] bg-gray-50"
-                    : "border-2 border-dashed border-gray-200 hover:bg-gray-50 hover:border-[#2A9D8F]/40"
-                  }`}
+                    : "border-2 border-dashed border-gray-200 hover:bg-gray-50"
+                }`}
               >
                 <input
                   ref={imageInputRef}
                   type="file"
                   name="image"
-                  required
                   accept="image/*"
-                  onChange={(e) => handleFilePreview(e, setImagePreview, imagePreview)}
-                  className={`absolute inset-0 w-full h-full opacity-0 cursor-pointer ${imagePreview ? "pointer-events-none" : ""
-                    }`}
+                  onChange={(e) =>
+                    handleFilePreview(e, setImagePreview, imagePreview)
+                  }
+                  className={`absolute inset-0 w-full h-full opacity-0 cursor-pointer ${
+                    imagePreview ? "pointer-events-none" : ""
+                  }`}
                 />
                 {imagePreview ? (
                   <div className="flex flex-col items-center justify-center">
                     <button
                       type="button"
-                      onClick={() => clearPreview(setImagePreview, imageInputRef, imagePreview)}
+                      onClick={() =>
+                        clearPreview(
+                          setImagePreview,
+                          imageInputRef,
+                          imagePreview
+                        )
+                      }
                       className="absolute top-2 right-2 z-20 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
                     >
                       <X size={14} />
@@ -221,7 +243,7 @@ export default function AddPortfolio() {
                 ) : (
                   <div className="flex flex-col items-center justify-center gap-2 text-gray-400">
                     <ImageIcon size={32} />
-                    <p className="text-sm">Click to upload</p>
+                    <p className="text-sm">Upload New Image</p>
                   </div>
                 )}
               </div>
@@ -236,10 +258,10 @@ export default function AddPortfolio() {
             {loading ? (
               <>
                 <Loader2 className="animate-spin" size={20} />
-                Uploading...
+                Updating...
               </>
             ) : (
-              "Publish Project"
+              "Save Changes"
             )}
           </button>
         </form>

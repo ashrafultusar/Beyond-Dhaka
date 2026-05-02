@@ -90,9 +90,8 @@ const ImageForm = () => {
                 accept="image/*"
                 onChange={handleImageChange}
                 required={!preview}
-                className={`absolute inset-0 z-10 cursor-pointer ${
-                  preview ? "hidden" : "opacity-0"
-                }`}
+                className={`absolute inset-0 z-10 cursor-pointer ${preview ? "hidden" : "opacity-0"
+                  }`}
               />
 
               {preview ? (
@@ -101,6 +100,7 @@ const ImageForm = () => {
                     src={preview}
                     alt="Preview"
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-contain rounded-lg"
                   />
                   <button
